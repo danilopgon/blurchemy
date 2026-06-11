@@ -1,0 +1,135 @@
+schema: spec-driven
+project: blurchemy
+persistence:
+  mode: openspec
+  initialized: 2026-06-11
+execution:
+  mode: interactive
+  next_recommended: sdd-new
+review:
+  chained_pr_strategy: ask-always
+  review_budget_lines: 800
+  initial_commit_exception: Initial docs/config/boilerplate may exceed the review budget on main; future functionality should stay within budget.
+
+context: |
+  Tech stack: Angular CLI 22 standalone browser application managed with pnpm.
+  Styling: Tailwind CSS 4 through the Angular CLI/PostCSS pipeline.
+  Architecture: Browser-only creative image-processing app; keep image data local and isolate future algorithms in pure utilities or browser-only services.
+  Testing: Angular unit-test builder with Vitest and Angular Testing utilities; strict TypeScript and strict Angular templates.
+  Quality: angular-eslint for linting and Prettier for formatting.
+
+strict_tdd: true
+
+testing:
+  strict_tdd: true
+  detected: 2026-06-11
+  package_manager: pnpm
+  runner:
+    framework: Vitest
+    command: pnpm run test
+    angular_builder: '@angular/build:unit-test'
+    environment: jsdom
+  pyramid:
+    unit:
+      available: true
+      tools:
+        - Vitest via Angular unit-test builder
+        - Angular Testing utilities/TestBed
+      command: pnpm run test
+      conventions:
+        - Prefer pure utility tests for browser-only image-processing algorithms.
+        - Keep Canvas/ImageData processing out of Angular computed Signals and test it outside components when practical.
+        - Use Angular component tests for template bindings, accessibility-relevant rendering, and user-event orchestration.
+    component:
+      available: true
+      tools:
+        - Angular Testing utilities/TestBed
+        - Vitest globals
+      command: pnpm run test
+      conventions:
+        - Test standalone components by importing the component under test.
+        - Keep component tests focused on rendering, state orchestration, and emitted outputs.
+    integration:
+      available: partial
+      tools:
+        - Angular services and browser-only adapters under Vitest/jsdom
+      command: pnpm run test
+      conventions:
+        - Use service-level seams for browser APIs so image-processing flows can be tested without backend assumptions.
+        - Add Canvas/ImageData fixtures later when the image-processing domain exists.
+    typecheck:
+      available: true
+      tools:
+        - TypeScript strict mode
+        - Angular strict templates
+      command: pnpm run typecheck
+    lint:
+      available: true
+      tool: angular-eslint
+      command: pnpm run lint
+    format:
+      available: true
+      tool: Prettier
+      check_command: pnpm run format:check
+      write_command: pnpm run format
+    e2e:
+      available: false
+      intended_tool: Playwright
+      command: null
+      convention: Documented as the intended future browser E2E layer; do not add until a real user flow exists and can be configured cleanly without feature code.
+    visual_regression:
+      available: false
+      intended_tool: To be selected later with the UI baseline.
+      command: null
+      convention: Future capability only; avoid claiming active visual regression coverage.
+    coverage:
+      available: false
+      command: null
+      convention: Add Vitest coverage only when coverage thresholds are intentionally introduced.
+  quality_commands:
+    format_check: pnpm run format:check
+    lint: pnpm run lint
+    test: pnpm run test
+    typecheck: pnpm run typecheck
+    build: pnpm run build
+
+rules:
+  proposal:
+    - State browser-only assumptions explicitly; do not introduce backend, authentication, database, storage, telemetry, or external API scope unless requested.
+    - Include user value, non-goals, rollout/rollback notes for risky changes, and expected verification layers.
+  specs:
+    - Use RFC 2119 keywords and Given/When/Then scenarios.
+    - Keep documentation honest: planned features must not be described as implemented.
+    - Include local-browser privacy requirements for imported images when image features are affected.
+  design:
+    - Keep image-processing algorithms isolated from Angular components in pure utilities or browser-only services.
+    - Use standalone Angular APIs; do not add NgModules for app features.
+    - Use Signals for local/feature state, with computed() only for lightweight derived state.
+    - Preserve responsive behavior, keyboard access, focus management, and WCAG AA color contrast.
+    - Document tradeoffs and boundaries before implementation.
+  tasks:
+    - Group tasks by phase with hierarchical numbering.
+    - Keep tasks reviewable and completable in one focused session where possible.
+    - Include tests and documentation with the code work they verify.
+  apply:
+    tdd: true
+    test_command: pnpm run test
+    directives:
+      - Follow existing Angular, TypeScript, Tailwind, ESLint, and Prettier conventions.
+      - Use input() and output() functions instead of decorators for component APIs.
+      - Use inject() instead of constructor injection.
+      - Use native Angular control flow and avoid ngClass/ngStyle.
+  verify:
+    test_command: pnpm run test
+    typecheck_command: pnpm run typecheck
+    lint_command: pnpm run lint
+    format_check_command: pnpm run format:check
+    build_command: pnpm run build
+    coverage_threshold: 0
+    directives:
+      - Report exact commands, pass/fail results, and any limitations.
+  archive:
+    directives:
+      - Move completed changes to openspec/changes/archive/YYYY-MM-DD-{change-name}/.
+      - Merge accepted delta specs into openspec/specs/ and preserve the archive as an audit trail.
+      - Warn before merging destructive deltas.
