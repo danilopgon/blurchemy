@@ -60,3 +60,4 @@ Blurchemy should separate browser-local image-processing logic from presentation
 - `docs/presets.md` captures planned preset direction.
 - `docs/export.md` captures planned export behavior.
 - `docs/roadmap.md` tracks implementation phases.
+- `docs/sdd-spec-plan.md` documents the three-spec implementation plan.

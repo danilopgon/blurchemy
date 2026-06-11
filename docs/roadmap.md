@@ -10,6 +10,7 @@
 
 ## Next
 
+- Follow the three-spec SDD plan in `docs/sdd-spec-plan.md`.
 - Define the SDD proposal/spec/design for the first Blurchemy editor increment.
 - Introduce browser-only image import and preview.
 - Add focused tests for any pure utility or processing boundary introduced.
