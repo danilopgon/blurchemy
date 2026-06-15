@@ -1,6 +1,6 @@
 # PRODUCT.md — Blurchemy
 
-> **Scope of this document.** This is the product brief for the first SDD change, **`editor-import-foundation`**. It frames the product as a whole only enough to position the first slice. Everything marked **Available in Spec 1** is what this change delivers; everything marked **Placeholder** or **Out of scope** is explicitly *not* built yet.
+> **Scope of this document.** This is the product brief for the first SDD change, **`editor-import-foundation`**. It frames the product as a whole only enough to position the first slice. Everything marked **Available in Spec 1** is what this change delivers; everything marked **Placeholder** or **Out of scope** is explicitly _not_ built yet.
 
 ---
 
@@ -28,13 +28,13 @@ Blurchemy removes both. But none of that matters if **import** is unreliable —
 
 ## 4. First-slice user journey
 
-1. **Arrive.** The editor opens directly to the workspace: a top bar and a two-panel stage labelled **Original** and **Processed**. No splash, no login. The state line reads *"No image loaded."*
-2. **Understand the offer.** The Original panel is an inviting dropzone — *"Drop an image to begin,"* the accepted formats and limits, and a one-line privacy reassurance. The Processed panel is present but clearly marked as a later release, so the two-panel intent reads from the first second without overpromising.
+1. **Arrive.** The editor opens directly to the workspace: a top bar and a two-panel stage labelled **Original** and **Processed**. No splash, no login. The state line reads _"No image loaded."_
+2. **Understand the offer.** The Original panel is an inviting dropzone — _"Drop an image to begin,"_ the accepted formats and limits, and a one-line privacy reassurance. The Processed panel is present but clearly marked as a later release, so the two-panel intent reads from the first second without overpromising.
 3. **Import.** The user drags a file onto the panel, or clicks to open the native file picker. Both paths are first-class.
-4. **Validate.** Blurchemy checks format, file size, and pixel dimensions locally, decoding the image in the browser. A brief *"Reading image…"* state covers the work.
+4. **Validate.** Blurchemy checks format, file size, and pixel dimensions locally, decoding the image in the browser. A brief _"Reading image…"_ state covers the work.
 5. **Branch:**
    - **Success →** the Original panel shows the image on a transparency checkerboard; the status bar fills with filename, format, dimensions, and size. The primary action becomes **Replace image**.
-   - **Failure →** the panel becomes a clear error state naming the *specific* rule that failed (wrong format / too large / dimensions too large / unreadable) and offers **Try another image**.
+   - **Failure →** the panel becomes a clear error state naming the _specific_ rule that failed (wrong format / too large / dimensions too large / unreadable) and offers **Try another image**.
 6. **Iterate.** The user can replace the image (the previous Object URL is released) or remove it to return to the empty state.
 
 There the Spec 1 journey ends. The Processed panel continues to state, honestly, that effects arrive later.
@@ -45,7 +45,7 @@ There the Spec 1 journey ends. The Processed panel continues to state, honestly,
 
 - Editor/app shell: top bar (brand, version marker, primary action), workspace stage, status bar.
 - Two-panel preview layout present from the start: **Original** and **Processed**.
-- Local image import via **drag-and-drop** *and* a **file picker** (both required).
+- Local image import via **drag-and-drop** _and_ a **file picker** (both required).
 - Client-side validation: **file type**, **file size**, **pixel dimensions**.
 - Four explicit UI states: **empty**, **importing/validating**, **imported**, **error**.
 - Image preview in the Original panel (contained, on a transparency checkerboard).
@@ -78,8 +78,8 @@ There the Spec 1 journey ends. The Processed panel continues to state, honestly,
 
 ## 7. Product decisions (fixed)
 
-1. **Two panels from the start** — Original and Processed render from first load, before any image, so the product's intent reads immediately. *(Pre-decided.)*
-2. **Validation goes beyond MIME type** — import validates file size and pixel dimensions too, because a small file can still be enormous in pixels and would degrade the future in-browser Canvas pipeline. *(Pre-decided.)*
+1. **Two panels from the start** — Original and Processed render from first load, before any image, so the product's intent reads immediately. _(Pre-decided.)_
+2. **Validation goes beyond MIME type** — import validates file size and pixel dimensions too, because a small file can still be enormous in pixels and would degrade the future in-browser Canvas pipeline. _(Pre-decided.)_
 3. **Drag-and-drop is in Spec 1**, alongside the file picker. The picker remains the keyboard-accessible, always-available fallback.
 4. **Primary post-import action is "Replace image"** — honest (it does something real today), keeps the workspace as the focus, implies no downstream features. **Remove** is the secondary action.
 5. **Validation limits: 20 MB and 6000 × 6000 px** (conservative tier) — see §11.
@@ -89,13 +89,13 @@ There the Spec 1 journey ends. The Processed panel continues to state, honestly,
 
 ## 8. Open questions (resolved for Spec 1)
 
-| Question | Resolution for Spec 1 |
-|---|---|
-| Max file size | **20 MB** |
-| Max pixel dimensions | **6000 × 6000 px** |
-| Drag-and-drop required? | **Yes**, with file picker as the accessible fallback |
-| Primary post-import CTA | **Replace image** |
-| Visual direction | **Dark creative workspace, cyan accent** (DESIGN.md) |
+| Question                | Resolution for Spec 1                                                            |
+| ----------------------- | -------------------------------------------------------------------------------- |
+| Max file size           | **20 MB**                                                                        |
+| Max pixel dimensions    | **6000 × 6000 px**                                                               |
+| Drag-and-drop required? | **Yes**, with file picker as the accessible fallback                             |
+| Primary post-import CTA | **Replace image**                                                                |
+| Visual direction        | **Dark creative workspace, cyan accent** (DESIGN.md)                             |
 | Accessibility beyond AA | **AA + large touch targets + screen-reader live announcements + reduced-motion** |
 
 Deferred to later specs: GIF/AVIF support, animated-frame handling, multiple simultaneous images, device-adaptive limits.
@@ -103,16 +103,19 @@ Deferred to later specs: GIF/AVIF support, animated-frame handling, multiple sim
 ## 9. Acceptance criteria
 
 **Shell & layout**
-- **AC-1** On first load, with no image, the editor shows the top bar, both **Original** and **Processed** panels, and a status line reading *"No image loaded."*
+
+- **AC-1** On first load, with no image, the editor shows the top bar, both **Original** and **Processed** panels, and a status line reading _"No image loaded."_
 - **AC-2** The Processed panel is visibly marked as a later release and never shows an image in Spec 1.
 - **AC-3** The layout is two columns on viewports ≥ 861 px and stacks vertically below that, with no horizontal scroll.
 
 **Import**
+
 - **AC-4** A user can import an image by dropping a file onto the Original panel.
 - **AC-5** A user can import an image by activating the import control and choosing a file in the OS picker.
 - **AC-6** The import control is operable by keyboard alone (focusable, activates on Enter/Space), with a visible focus indicator.
 
 **Validation**
+
 - **AC-7** Files whose type is not JPEG, PNG, or WebP are rejected with an error naming the format problem.
 - **AC-8** Files larger than 20 MB are rejected with an error stating the size limit and the file's actual size.
 - **AC-9** Images larger than 6000 px on either side are rejected with an error stating the dimension limit and the image's actual dimensions.
@@ -120,18 +123,21 @@ Deferred to later specs: GIF/AVIF support, animated-frame handling, multiple sim
 - **AC-11** Validation order is type → size → dimensions; the first failing rule is the one reported.
 
 **Imported state**
+
 - **AC-12** On success, the Original panel renders the image contained within the panel (no overflow, aspect ratio preserved).
 - **AC-13** The status bar shows filename, format, pixel dimensions, and human-readable file size.
 - **AC-14** The primary action becomes **Replace image**; a **Remove** action is available.
 - **AC-15** Replacing or removing an image releases the previous image's Object URL (no leaked `blob:` URLs).
 
 **Accessibility**
+
 - **AC-16** Every state change (importing, imported, error) is announced via a polite live region.
 - **AC-17** All text and meaningful UI meets WCAG AA contrast in both dark and light themes.
 - **AC-18** Interactive targets are at least 44 × 44 px.
 - **AC-19** With `prefers-reduced-motion: reduce`, non-essential motion is suppressed.
 
 **Honesty**
+
 - **AC-20** No copy, label, button, or tooltip in Spec 1 implies effects, presets, randomization, or export exist.
 
 ## 10. Privacy & local-only requirements
@@ -144,20 +150,20 @@ Deferred to later specs: GIF/AVIF support, animated-frame handling, multiple sim
 
 ## 11. Validation rules
 
-| Rule | Value | Rationale |
-|---|---|---|
-| **Accepted types** | `image/jpeg`, `image/png`, `image/webp` | Covers the vast majority of source images while keeping decode behaviour predictable for the future Canvas pipeline. GIF/AVIF deferred. |
-| **Max file size** | **20 MB** | Conservative ceiling that keeps in-browser reads fast and protects low-memory devices. Reported with the file's actual size on failure. |
-| **Max pixel dimensions** | **6000 × 6000 px** per side | Pixel count, not bytes, drives Canvas/ImageData cost in Spec 2. A small JPEG can still be huge in pixels, so this is validated independently by decoding locally. |
+| Rule                     | Value                                   | Rationale                                                                                                                                                         |
+| ------------------------ | --------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Accepted types**       | `image/jpeg`, `image/png`, `image/webp` | Covers the vast majority of source images while keeping decode behaviour predictable for the future Canvas pipeline. GIF/AVIF deferred.                           |
+| **Max file size**        | **20 MB**                               | Conservative ceiling that keeps in-browser reads fast and protects low-memory devices. Reported with the file's actual size on failure.                           |
+| **Max pixel dimensions** | **6000 × 6000 px** per side             | Pixel count, not bytes, drives Canvas/ImageData cost in Spec 2. A small JPEG can still be huge in pixels, so this is validated independently by decoding locally. |
 
 **Validation sequence:** type → size → dimensions. Dimension validation requires a decode, so it runs last and only on a candidate that already passed type and size.
 
 **Error messages (one per failing rule):**
 
-- **Unsupported format** — *"Blurchemy accepts JPEG, PNG and WebP. '{name}' looks like {detected}."*
-- **File too large** — *"This image is {size}. The current limit is 20 MB so processing stays fast in the browser."*
-- **Dimensions too large** — *"This image is {w} × {h} px. The current limit is 6000 × 6000 px per side."*
-- **Unreadable** — *"The file appears to be corrupt or isn't a real image. Try a different one."*
+- **Unsupported format** — _"Blurchemy accepts JPEG, PNG and WebP. '{name}' looks like {detected}."_
+- **File too large** — _"This image is {size}. The current limit is 20 MB so processing stays fast in the browser."_
+- **Dimensions too large** — _"This image is {w} × {h} px. The current limit is 6000 × 6000 px per side."_
+- **Unreadable** — _"The file appears to be corrupt or isn't a real image. Try a different one."_
 
 ## 12. Success criteria for the slice
 

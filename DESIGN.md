@@ -22,31 +22,31 @@ All colors are authored in **oklch** for perceptual consistency; the accent is s
 
 ### Dark theme (default)
 
-| Token | Value | Role |
-|---|---|---|
-| `--bg` | `oklch(0.16 0.004 70)` | App background base |
-| `--bg-grad` | `oklch(0.19 0.005 70)` | Soft radial lift behind the top of the stage |
-| `--surface` | `oklch(0.205 0.005 70)` | Panel surface, top bar, status bar |
-| `--surface-2` | `oklch(0.245 0.006 70)` | Raised chips, icon wells, panel headers |
-| `--surface-3` | `oklch(0.285 0.007 70)` | Highest raised surface |
-| `--border` | `oklch(0.32 0.006 70)` | Default hairline borders |
-| `--border-strong` | `oklch(0.42 0.007 70)` | Emphasized borders, dividers |
-| `--text` | `oklch(0.96 0.003 80)` | Primary text |
-| `--text-dim` | `oklch(0.74 0.005 80)` | Secondary text, labels |
-| `--text-faint` | `oklch(0.56 0.006 80)` | Tertiary / metadata captions |
-| `--checker` / `--checker-2` | `oklch(0.24 …)` / `oklch(0.21 …)` | Transparency checkerboard inside panels |
+| Token                       | Value                             | Role                                         |
+| --------------------------- | --------------------------------- | -------------------------------------------- |
+| `--bg`                      | `oklch(0.16 0.004 70)`            | App background base                          |
+| `--bg-grad`                 | `oklch(0.19 0.005 70)`            | Soft radial lift behind the top of the stage |
+| `--surface`                 | `oklch(0.205 0.005 70)`           | Panel surface, top bar, status bar           |
+| `--surface-2`               | `oklch(0.245 0.006 70)`           | Raised chips, icon wells, panel headers      |
+| `--surface-3`               | `oklch(0.285 0.007 70)`           | Highest raised surface                       |
+| `--border`                  | `oklch(0.32 0.006 70)`            | Default hairline borders                     |
+| `--border-strong`           | `oklch(0.42 0.007 70)`            | Emphasized borders, dividers                 |
+| `--text`                    | `oklch(0.96 0.003 80)`            | Primary text                                 |
+| `--text-dim`                | `oklch(0.74 0.005 80)`            | Secondary text, labels                       |
+| `--text-faint`              | `oklch(0.56 0.006 80)`            | Tertiary / metadata captions                 |
+| `--checker` / `--checker-2` | `oklch(0.24 …)` / `oklch(0.21 …)` | Transparency checkerboard inside panels      |
 
 ### Accent (cyan — locked) & semantic
 
-| Token | Value | Role |
-|---|---|---|
-| `--accent` | `#46c8d8` | Brand mark, primary button, focus ring, active drop state |
-| `--accent-press` | derived (≈ −12% lightness) | Pressed/hover state of primary action |
-| `--accent-ink` | derived (dark ink on cyan) | Text/icon **on** the accent fill |
-| `--danger` | `oklch(0.70 0.17 25)` | Error text and error iconography |
-| `--danger-surface` | `oklch(0.30 0.07 25)` | Error-state panel wash |
-| `--danger-border` | `oklch(0.45 0.12 25)` | Error icon well border |
-| `--warn` | `oklch(0.80 0.13 85)` | Reserved for soft warnings |
+| Token              | Value                      | Role                                                      |
+| ------------------ | -------------------------- | --------------------------------------------------------- |
+| `--accent`         | `#46c8d8`                  | Brand mark, primary button, focus ring, active drop state |
+| `--accent-press`   | derived (≈ −12% lightness) | Pressed/hover state of primary action                     |
+| `--accent-ink`     | derived (dark ink on cyan) | Text/icon **on** the accent fill                          |
+| `--danger`         | `oklch(0.70 0.17 25)`      | Error text and error iconography                          |
+| `--danger-surface` | `oklch(0.30 0.07 25)`      | Error-state panel wash                                    |
+| `--danger-border`  | `oklch(0.45 0.12 25)`      | Error icon well border                                    |
+| `--warn`           | `oklch(0.80 0.13 85)`      | Reserved for soft warnings                                |
 
 **Accent usage rule:** cyan appears at most a few times per screen — the brand dot, the primary action, the focus ring, the active dropzone glow, and the imported status dot. It is never used for body text or large fills.
 
@@ -54,24 +54,24 @@ All colors are authored in **oklch** for perceptual consistency; the accent is s
 
 ## 4. Typography
 
-| Family | Use | Notes |
-|---|---|---|
-| **Archivo** (grotesque) | All UI text — brand, buttons, titles, body copy | Weights 400/500/600/700/800. Tight tracking on headings (`-0.01em`/`-0.02em`). |
-| **JetBrains Mono** | Technical data — metadata read-out, panel labels, version chip, spec pills, error codes | Weights 400/500/600. This is the "data is true" signal. |
+| Family                  | Use                                                                                     | Notes                                                                          |
+| ----------------------- | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| **Archivo** (grotesque) | All UI text — brand, buttons, titles, body copy                                         | Weights 400/500/600/700/800. Tight tracking on headings (`-0.01em`/`-0.02em`). |
+| **JetBrains Mono**      | Technical data — metadata read-out, panel labels, version chip, spec pills, error codes | Weights 400/500/600. This is the "data is true" signal.                        |
 
 **Scale (Spec 1 surfaces):**
 
-| Element | Size / weight |
-|---|---|
-| Brand name | 18px / 800 |
-| State title (empty, error, importing) | 19px / 700 |
-| Processed placeholder title | 16px / 700 |
-| Body copy | 13.5–14px / 400, `line-height ≈ 1.55`, `text-wrap: pretty` |
-| Primary button | 14.5px / 700 |
-| Panel label (mono, uppercase) | 11.5px / 600, `letter-spacing 0.14em` |
-| Metadata value (mono) | 11.5px / 500 |
-| Metadata key (mono, uppercase) | 10px / 600, `letter-spacing 0.1em` |
-| Captions / pills (mono) | 10.5–11px |
+| Element                               | Size / weight                                              |
+| ------------------------------------- | ---------------------------------------------------------- |
+| Brand name                            | 18px / 800                                                 |
+| State title (empty, error, importing) | 19px / 700                                                 |
+| Processed placeholder title           | 16px / 700                                                 |
+| Body copy                             | 13.5–14px / 400, `line-height ≈ 1.55`, `text-wrap: pretty` |
+| Primary button                        | 14.5px / 700                                               |
+| Panel label (mono, uppercase)         | 11.5px / 600, `letter-spacing 0.14em`                      |
+| Metadata value (mono)                 | 11.5px / 500                                               |
+| Metadata key (mono, uppercase)        | 10px / 600, `letter-spacing 0.1em`                         |
+| Captions / pills (mono)               | 10.5–11px                                                  |
 
 Minimum on-screen text is ~10px and reserved for mono micro-labels (keys, pills); all reading copy is ≥ 13.5px.
 
@@ -92,19 +92,24 @@ Minimum on-screen text is ~10px and reserved for mono micro-labels (keys, pills)
 ## 7. Component states
 
 ### Empty / dropzone (Original)
-Centered composition: a rounded icon well (upload glyph, cyan), title *"Drop an image to begin,"* a one-line instruction with an inline **browse your device** text button, a row of format pills (`JPEG` `PNG` `WebP`) and limits (`up to 20 MB`, `max 6000 × 6000 px`), and a privacy note: *"Images never leave your browser. Nothing is uploaded."* The whole panel is the drop target and is keyboard-focusable.
+
+Centered composition: a rounded icon well (upload glyph, cyan), title _"Drop an image to begin,"_ a one-line instruction with an inline **browse your device** text button, a row of format pills (`JPEG` `PNG` `WebP`) and limits (`up to 20 MB`, `max 6000 × 6000 px`), and a privacy note: _"Images never leave your browser. Nothing is uploaded."_ The whole panel is the drop target and is keyboard-focusable.
 
 ### Drag-over
-The canvas shows an inset cyan ring and a soft cyan inner glow; the icon well scales up slightly and tints cyan; the title switches to *"Drop to import."* Depth-counted enter/leave so child elements don't cause flicker.
+
+The canvas shows an inset cyan ring and a soft cyan inner glow; the icon well scales up slightly and tints cyan; the title switches to _"Drop to import."_ Depth-counted enter/leave so child elements don't cause flicker.
 
 ### Importing / validating
-Cyan spinner, title *"Reading image…,"* subtitle *"Validating format, size and dimensions locally."* Brief; covers the decode.
+
+Cyan spinner, title _"Reading image…,"_ subtitle _"Validating format, size and dimensions locally."_ Brief; covers the decode.
 
 ### Imported
+
 The image is rendered `object-fit: contain` within the panel on the checkerboard, with a contact shadow. Header gains dimensions; status bar fills with metadata; primary action becomes **Replace image**, with **Remove** secondary.
 
 ### Error
-The canvas turns to the danger wash, a danger-tinted alert icon well, a danger-colored title naming the failure (*Unsupported format* / *File is too large* / *Dimensions too large* / *Couldn't read that image*), a plain-language detail line, a mono `rejected: …` code line, and a **Try another image** action.
+
+The canvas turns to the danger wash, a danger-tinted alert icon well, a danger-colored title naming the failure (_Unsupported format_ / _File is too large_ / _Dimensions too large_ / _Couldn't read that image_), a plain-language detail line, a mono `rejected: …` code line, and a **Try another image** action.
 
 ## 8. Iconography
 
@@ -112,7 +117,7 @@ Simple geometric line glyphs, `1.7–1.8` stroke, `currentColor`, round caps/joi
 
 ## 9. Brand mark
 
-A solid cyan dot with a second, blurred, offset cyan dot behind it — a literal "blur + alchemy" glyph. Small (30px), paired with the wordmark "Blurchemy" (800) and a mono tagline *"image studio · local-only."*
+A solid cyan dot with a second, blurred, offset cyan dot behind it — a literal "blur + alchemy" glyph. Small (30px), paired with the wordmark "Blurchemy" (800) and a mono tagline _"image studio · local-only."_
 
 ## 10. Motion
 

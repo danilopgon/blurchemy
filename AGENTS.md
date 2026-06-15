@@ -21,6 +21,7 @@ Generated technical artifacts must be written in professional English.
 ## Angular Standards
 
 - Use strict TypeScript. Avoid `any`; use `unknown` at uncertain boundaries.
+- Prefer `type` aliases over `interface` for TypeScript contracts. Use type composition for closed domain models, ports, and view models; only use `interface` when declaration merging or an explicitly extensible public API is required.
 - Do not set `standalone: true` in decorators; it is the Angular v20+ default.
 - Use Signals for local and feature state, with `computed()` only for lightweight derived state.
 - Do not put expensive Canvas/ImageData processing inside `computed` Signals.
