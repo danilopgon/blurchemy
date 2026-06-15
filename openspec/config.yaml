@@ -34,21 +34,25 @@ testing:
       available: true
       tools:
         - Vitest via Angular unit-test builder
-        - Angular Testing utilities/TestBed
+        - Angular Testing utilities/TestBed for Angular-specific seams
       command: pnpm run test
       conventions:
         - Prefer pure utility tests for browser-only image-processing algorithms.
         - Keep Canvas/ImageData processing out of Angular computed Signals and test it outside components when practical.
-        - Use Angular component tests for template bindings, accessibility-relevant rendering, and user-event orchestration.
+        - Use fast unit tests for deterministic image-processing math, preset mapping, state reducers, validation, and browser adapter boundaries.
     component:
       available: true
+      status: active-foundation
       tools:
         - Angular Testing utilities/TestBed
         - Vitest globals
+      optional_tools:
+        - '@testing-library/angular for user-centric interaction tests when component behavior becomes complex enough to justify the dependency'
       command: pnpm run test
       conventions:
         - Test standalone components by importing the component under test.
-        - Keep component tests focused on rendering, state orchestration, and emitted outputs.
+        - Keep component tests focused on rendering, state orchestration, emitted outputs, accessibility-relevant DOM, and user-event orchestration.
+        - Do not add Angular Testing Library by default; introduce it only when it improves readability or behavior coverage over TestBed for real UI flows.
     integration:
       available: partial
       tools:
@@ -76,16 +80,33 @@ testing:
       available: false
       intended_tool: Playwright
       command: null
-      convention: Documented as the intended future browser E2E layer; do not add until a real user flow exists and can be configured cleanly without feature code.
+      convention: Documented as the intended future browser E2E layer; add when the first real user flow exists, such as import image -> apply effect -> export, and keep imported image data local to the browser.
     visual_regression:
       available: false
-      intended_tool: To be selected later with the UI baseline.
+      intended_tool: Playwright screenshots or a dedicated visual regression tool to be selected once the UI/effect baseline exists.
       command: null
-      convention: Future capability only; avoid claiming active visual regression coverage.
+      convention: Future capability for visual effect/preset regressions; avoid claiming active visual regression coverage until baselines and review workflow exist.
     coverage:
       available: false
       command: null
-      convention: Add Vitest coverage only when coverage thresholds are intentionally introduced.
+      intended_tool: Vitest coverage provider
+      convention: Add Vitest coverage only when coverage thresholds are intentionally introduced; prefer meaningful layer coverage over vanity percentages.
+    dependency_readiness:
+      active_dependencies:
+        - '@angular/build unit-test builder'
+        - Vitest
+        - jsdom
+        - Angular Testing utilities/TestBed
+        - angular-eslint
+        - Prettier
+      missing_for_future_layers:
+        - '@testing-library/angular only if component interaction tests need a user-centric helper layer beyond TestBed'
+        - Playwright package and browser install when E2E flows are introduced
+        - Visual regression tooling or Playwright screenshot workflow when stable visual baselines exist
+        - Vitest coverage provider/configuration when coverage thresholds are introduced
+      decision:
+        - The current dependency set is sufficient before the first feature spec if the first spec does not require E2E, visual regression, or Testing Library-specific component ergonomics.
+        - New testing dependencies must be introduced by the spec/design that first needs their layer, not as unused upfront tooling.
   quality_commands:
     format_check: pnpm run format:check
     lint: pnpm run lint
