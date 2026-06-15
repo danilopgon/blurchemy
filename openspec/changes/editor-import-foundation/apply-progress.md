@@ -4,7 +4,8 @@
 
 - Slice 1 / stacked-to-main PR 1: import domain, validation helpers, image decode seam, metadata formatting, and Object URL lifecycle seam.
 - Slice 1b refactor: split the temporary mixed-responsibility import seam into Angular/Screaming responsibility folders without behavior changes.
-- Slice 2 / stacked-to-main PR 2: standalone editor component state and interactions around the existing import seam.
+- Slice 2 / stacked-to-main PR 2 — commit `795a1cf`: standalone editor component state and interactions around the existing import seam.
+- Slice 2b Tailwind refactor (included in `795a1cf`): editor template rewritten with Tailwind utility classes, `@theme` tokens in `src/styles.css`, component CSS reduced from 239 to 12 lines (only checkerboard, hatch, drag-active patterns remain).
 
 Root app hosting, final full styling pass, image processing, persistence, upload, telemetry, backend, effects, export, presets, and new dependencies remain out of scope.
 
@@ -32,7 +33,7 @@ Root app hosting, final full styling pass, image processing, persistence, upload
 
 ## Files Changed Across Completed Slices
 
-| File                                                                          | Action               | Summary                                                                                                                                                                 |
+| File                                                                          | Action               | Summary                                                                                                                                                                        |
 | ----------------------------------------------------------------------------- | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `src/app/features/blurchemy-editor/image-import.spec.ts`                      | Created/Modified     | Import-domain behavior tests, later updated to responsibility-folder imports.                                                                                           |
 | `src/app/features/blurchemy-editor/types/image-import.type.ts`                | Created              | Closed domain contracts using `type` aliases.                                                                                                                           |
@@ -46,7 +47,8 @@ Root app hosting, final full styling pass, image processing, persistence, upload
 | `src/app/features/blurchemy-editor/editor.component.spec.ts`                  | Created              | Component tests for shell honesty, picker/drop import flows, success/error states, metadata, live announcements, Object URL replacement/removal, and focus restoration. |
 | `src/app/features/blurchemy-editor/editor.component.ts`                       | Created              | Standalone editor component state and orchestration using Signals, injected ports, picker/drop handlers, live announcements, remove, and destroy cleanup.               |
 | `src/app/features/blurchemy-editor/editor.component.html`                     | Created              | Editor shell template with top bar, Original/Processed panels, empty/importing/imported/error rendering, file input, status bar, and polite live region.                |
-| `src/app/features/blurchemy-editor/editor.component.css`                      | Created              | Focused component styling for the shell, panels, checkerboard/hatch surfaces, focus rings, touch targets, responsive stacking, and reduced-motion handling.             |
+| `src/app/features/blurchemy-editor/editor.component.css`                      | Created/Refactored   | Tailwind refactor reduced from 239 to 12 lines — only checkerboard, hatch, and drag-active patterns remain in CSS.                                                       |
+| `src/styles.css`                                                              | Created/@theme block | Design tokens for dark studio palette, cyan accent, Archivo/JetBrains Mono fonts via `@theme`.                                                                          |
 | `eslint.config.js`                                                            | Modified in Slice 1b | Aligned `@typescript-eslint/consistent-type-definitions` with the project preference for `type` aliases.                                                                |
 | `openspec/changes/editor-import-foundation/tasks.md`                          | Modified             | Marked Phase 1 and Phase 2 tasks complete; recorded Slice 1b note.                                                                                                      |
 | `openspec/changes/editor-import-foundation/apply-progress.md`                 | Modified             | Merged cumulative apply progress, TDD evidence, verification, limitations, next slice, and rollback notes.                                                              |
@@ -67,6 +69,7 @@ The editor component now supports empty, importing, imported, and error states a
 | `pnpm run lint`                                                                         | Passed             | All files pass linting.                                                                          |
 | `pnpm run typecheck`                                                                    | Passed             | Development build/typecheck completed successfully.                                              |
 | `pnpm run build`                                                                        | Passed             | Production build completed successfully.                                                         |
+| `pnpm exec prettier --write src/app/features/blurchemy-editor/editor.component.html src/app/features/blurchemy-editor/editor.component.css` | Passed | Tailwind refactor files formatted.                                                                  |
 
 ## Limitations
 

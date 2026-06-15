@@ -39,6 +39,7 @@ Slice 1b refactor note: the completed import seam was split from the temporary m
 - [x] 2.1 RED: Add `editor.component.spec.ts` for initial shell, honest Processed placeholder, picker/drop validation start, importing/imported/error/empty states, metadata, replace/remove, live region, and focus behavior.
 - [x] 2.2 GREEN: Create `editor.component.ts/html/css` with Signals for state, drag depth, metadata, errors, current URL, announcements, picker and drop handlers, and destroy cleanup.
 - [x] 2.3 REFACTOR: Keep Canvas/ImageData work out of `computed`; use native control flow, `inject()`, host metadata if needed, and no NgModules or `standalone: true`.
+- [x] 2.4 REFACTOR: Refactor editor template from plain CSS to Tailwind utility classes. Add `@theme` tokens in `src/styles.css`. Reduce component CSS from 239 to 12 lines.
 
 ## Phase 3: Accessible Two-Panel UI and Responsive Styling
 
